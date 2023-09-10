@@ -1,4 +1,4 @@
-module github.com/pterm/pterm
+module github.com/kxait/pterm
 
 go 1.21
 

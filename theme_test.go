@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/MarvinJWendt/testza"
-	"github.com/pterm/pterm"
+	"github.com/kxait/pterm"
 )
 
 func TestTheme_WithDescriptionMessageStyle(t *testing.T) {

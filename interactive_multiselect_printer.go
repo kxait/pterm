@@ -2,6 +2,7 @@ package pterm
 
 import (
 	"fmt"
+	"slices"
 	"sort"
 
 	"atomicgo.dev/cursor"
@@ -9,7 +10,7 @@ import (
 	"atomicgo.dev/keyboard/keys"
 	"github.com/lithammer/fuzzysearch/fuzzy"
 
-	"github.com/pterm/pterm/internal"
+	"github.com/kxait/pterm/internal"
 )
 
 var (
@@ -230,14 +231,20 @@ func (p *InteractiveMultiselectPrinter) Show(text ...string) ([]string, error) {
 
 			area.Update(p.renderSelectMenu())
 		case keys.Left:
-			// Unselect all options
-			p.selectedOptions = []int{}
+			// Unselect all options within fuzzy
+
+			for i := 0; i < len(p.selectedOptions); i++ {
+				if slices.Contains(p.fuzzySearchMatches, p.Options[i]) {
+					p.selectedOptions = slices.Delete(p.selectedOptions, i, i+1)
+				}
+			}
 			area.Update(p.renderSelectMenu())
 		case keys.Right:
-			// Select all options
-			p.selectedOptions = []int{}
+			// Select all options matching fuzzy
 			for i := 0; i < len(p.Options); i++ {
-				p.selectedOptions = append(p.selectedOptions, i)
+				if slices.Contains(p.fuzzySearchMatches, p.Options[i]) {
+					p.selectedOptions = append(p.selectedOptions, i)
+				}
 			}
 			area.Update(p.renderSelectMenu())
 		case keys.Up:
@@ -284,6 +291,7 @@ func (p *InteractiveMultiselectPrinter) Show(text ...string) ([]string, error) {
 
 			area.Update(p.renderSelectMenu())
 		case keys.CtrlC:
+		case keys.Esc:
 			cancel()
 			return true, nil
 		}

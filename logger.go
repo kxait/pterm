@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pterm/pterm/internal"
+	"github.com/kxait/pterm/internal"
 )
 
 type LogLevel int

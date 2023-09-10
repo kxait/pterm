@@ -2,7 +2,7 @@ package pterm_test
 
 import (
 	"github.com/MarvinJWendt/testza"
-	"github.com/pterm/pterm"
+	"github.com/kxait/pterm"
 	"testing"
 )
 

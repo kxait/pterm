@@ -5,7 +5,7 @@ import (
 
 	"github.com/gookit/color"
 
-	"github.com/pterm/pterm/internal"
+	"github.com/kxait/pterm/internal"
 )
 
 // RGB color model is an additive color model in which red, green, and blue light are added together in various ways to reproduce a broad array of colors.
